@@ -1,4 +1,4 @@
-package com.kolosov.weatheradviserbot.openMeteo;
+package com.kolosov.openmeteosdk.api;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.kolosov.weatheradviserbot.analayze;
 
-import com.kolosov.weatheradviserbot.openMeteo.WeatherDayData;
-import com.kolosov.weatheradviserbot.openMeteo.WeatherDayData.WeatherHourData;
+import com.kolosov.openmeteosdk.api.WeatherDayData;
+import com.kolosov.openmeteosdk.api.WeatherDayData.WeatherHourData;
 import lombok.RequiredArgsConstructor;
 
 import java.util.*;

@@ -1,12 +1,12 @@
 package com.kolosov.weatheradviserbot.bot.pickleball;
 
+import com.kolosov.openmeteosdk.OpenMeteoService;
+import com.kolosov.openmeteosdk.api.WeatherDayData;
+import com.kolosov.openmeteosdk.api.WeatherDayData.WeatherHourData;
 import com.kolosov.weatheradviserbot.analayze.Analysis;
 import com.kolosov.weatheradviserbot.analayze.AnalyzerCommand;
 import com.kolosov.weatheradviserbot.analayze.PickleballAnalyzerCommand;
 import com.kolosov.weatheradviserbot.bot.ForecastService;
-import com.kolosov.weatheradviserbot.openMeteo.OpenMeteoService;
-import com.kolosov.weatheradviserbot.openMeteo.WeatherDayData;
-import com.kolosov.weatheradviserbot.openMeteo.WeatherDayData.WeatherHourData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +56,7 @@ public class PickleballService implements ForecastService {
                 weatherData);
     }
 
-    private boolean filterPickleballTime(WeatherDayData.WeatherHourData weatherHourData) {
+    private boolean filterPickleballTime(WeatherHourData weatherHourData) {
         int hour = weatherHourData.time().getHour();
         return isEveningHour(hour);
     }

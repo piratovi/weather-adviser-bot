@@ -1,11 +1,11 @@
-package com.kolosov.weatheradviserbot.configuration;
+package com.kolosov.openmeteosdk.config;
 
+import com.kolosov.openmeteosdk.api.OpenMeteoAPIClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
-import com.kolosov.weatheradviserbot.openMeteo.OpenMeteoAPIClient;
 
 
 @Configuration

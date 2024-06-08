@@ -1,7 +1,8 @@
 package com.kolosov.weatheradviserbot.bot;
 
-import com.kolosov.weatheradviserbot.openMeteo.WeatherDayData;
-import com.kolosov.weatheradviserbot.openMeteo.WeatherDayData.WeatherHourData;
+
+import com.kolosov.openmeteosdk.api.WeatherDayData;
+import com.kolosov.openmeteosdk.api.WeatherDayData.WeatherHourData;
 
 import java.util.SortedSet;
 import java.util.TreeSet;

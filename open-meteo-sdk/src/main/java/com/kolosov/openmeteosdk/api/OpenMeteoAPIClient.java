@@ -1,4 +1,4 @@
-package com.kolosov.weatheradviserbot.openMeteo;
+package com.kolosov.openmeteosdk.api;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;

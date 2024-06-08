@@ -1,6 +1,9 @@
-package com.kolosov.weatheradviserbot.openMeteo;
+package com.kolosov.openmeteosdk;
 
-import com.kolosov.weatheradviserbot.openMeteo.WeatherDayData.WeatherHourData;
+import com.kolosov.openmeteosdk.api.WeatherDayData;
+import com.kolosov.openmeteosdk.api.WeatherDayData.WeatherHourData;
+import com.kolosov.openmeteosdk.api.OpenMeteoAPIClient;
+import com.kolosov.openmeteosdk.api.OpenMeteoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +15,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static com.kolosov.weatheradviserbot.openMeteo.Location.PICKLEBALL;
+import static com.kolosov.openmeteosdk.Location.PICKLEBALL;
 import static java.util.stream.Collectors.toCollection;
 
 @Service
@@ -27,7 +30,7 @@ public class OpenMeteoService {
         return mapResponse(perceptionForecast.hourly());
     }
 
-    OpenMeteoResponse getPerceptionForecast(Location location) {
+    public OpenMeteoResponse getPerceptionForecast(Location location) {
         return client.getRawForecast(location.getLatitude(), location.getLongitude());
     }
 

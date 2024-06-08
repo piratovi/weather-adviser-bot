@@ -1,11 +1,11 @@
-package com.kolosov.weatheradviserbot.openMeteo;
+package com.kolosov.openmeteosdk;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-enum Location {
+public enum Location {
     PICKLEBALL(7.54156, 98.21083);
 
     private final double latitude;
