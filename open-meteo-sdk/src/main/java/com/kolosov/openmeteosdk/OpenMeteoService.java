@@ -27,21 +27,21 @@ public class OpenMeteoService {
 
     public SortedSet<WeatherDayData> getWeekForecastForPickleball() {
         Location pickleball = Location.pickleball();
-        OpenMeteoResponse perceptionForecast = client.getRawForecast(pickleball.latitude(), pickleball.longitude());
-        return mapResponse(perceptionForecast.hourly());
+        var openMeteoResponse = client.getRawForecast(pickleball.latitude(), pickleball.longitude());
+        return groupHourlyForecastsByDay(openMeteoResponse.hourly());
     }
 
     public SortedSet<WeatherDayData> getWeekForecast(Location location) {
-        OpenMeteoResponse perceptionForecast = client.getRawForecast(location.latitude(), location.longitude());
-        return mapResponse(perceptionForecast.hourly());
+        var openMeteoResponse = client.getRawForecast(location.latitude(), location.longitude());
+        return groupHourlyForecastsByDay(openMeteoResponse.hourly());
     }
 
-    private SortedSet<WeatherDayData> mapResponse(OpenMeteoHourlyForecast container) {
-        Map<LocalDate, SortedSet<WeatherHourData>> map = IntStream.range(0, container.time().size())
+    private SortedSet<WeatherDayData> groupHourlyForecastsByDay(OpenMeteoHourlyForecast hourlyForecast) {
+        Map<LocalDate, SortedSet<WeatherHourData>> map = IntStream.range(0, hourlyForecast.time().size())
                 .boxed()
-                .map(i -> mapForecastDTO(container, i))
+                .map(i -> mapForecastDTO(hourlyForecast, i))
                 .collect(Collectors.groupingBy(
-                        f -> f.time.toLocalDate(),
+                        f -> f.dateTime.toLocalDate(),
                         Collectors.mapping(this::mapForecastHourData, toCollection(TreeSet::new))
                 ));
         return map.entrySet().stream()
@@ -49,7 +49,7 @@ public class OpenMeteoService {
                 .collect(toCollection(TreeSet::new));
     }
 
-    private record ForecastDTO(LocalDateTime time,
+    private record ForecastDTO(LocalDateTime dateTime,
                                double precipitation,
                                double temperature,
                                double apparentTemperature,
@@ -60,23 +60,23 @@ public class OpenMeteoService {
                                double windGusts) {
     }
 
-    private ForecastDTO mapForecastDTO(OpenMeteoHourlyForecast container, Integer index) {
+    private ForecastDTO mapForecastDTO(OpenMeteoHourlyForecast hourlyForecast, int index) {
         return new ForecastDTO(
-                container.time().get(index),
-                container.precipitation().get(index),
-                container.temperature_2m().get(index),
-                container.apparent_temperature().get(index),
-                container.relative_humidity_2m().get(index),
-                container.cloud_cover().get(index),
-                container.precipitation_probability().get(index),
-                container.wind_speed_10m().get(index),
-                container.wind_gusts_10m().get(index)
+                hourlyForecast.time().get(index),
+                hourlyForecast.precipitation().get(index),
+                hourlyForecast.temperature_2m().get(index),
+                hourlyForecast.apparent_temperature().get(index),
+                hourlyForecast.relative_humidity_2m().get(index),
+                hourlyForecast.cloud_cover().get(index),
+                hourlyForecast.precipitation_probability().get(index),
+                hourlyForecast.wind_speed_10m().get(index),
+                hourlyForecast.wind_gusts_10m().get(index)
         );
     }
 
     private WeatherHourData mapForecastHourData(ForecastDTO forecastDTO) {
         return new WeatherHourData(
-                forecastDTO.time().toLocalTime(),
+                forecastDTO.dateTime().toLocalTime(),
                 forecastDTO.precipitation(),
                 forecastDTO.temperature(),
                 forecastDTO.apparentTemperature(),
