@@ -43,7 +43,7 @@ public class PickleballAnalyzerCommand implements AnalyzerCommand {
                 .max()
                 .orElseThrow();
         double windsGusts = dataSet.stream()
-                .mapToDouble(WeatherHourData::windsGusts)
+                .mapToDouble(WeatherHourData::windGusts)
                 .max()
                 .orElseThrow();
         if (windSpeed < 10 && windsGusts < 15) {

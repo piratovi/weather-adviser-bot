@@ -21,7 +21,7 @@ public record WeatherDayData(LocalDate day, SortedSet<WeatherHourData> weatherHo
             int cloudCover,
             int precipitationProbability,
             double windSpeed,
-            double windsGusts
+            double windGusts
     ) implements Comparable<WeatherHourData> {
 
         @Override

@@ -1,5 +1,6 @@
 package com.kolosov.weatheradviserbot.bot.pickleball;
 
+import com.kolosov.openmeteosdk.Location;
 import com.kolosov.openmeteosdk.OpenMeteoService;
 import com.kolosov.openmeteosdk.api.WeatherDayData;
 import com.kolosov.openmeteosdk.api.WeatherDayData.WeatherHourData;
@@ -28,7 +29,7 @@ public class PickleballService implements ForecastService {
 
     @Override
     public String getForecast() {
-        SortedSet<WeatherDayData> forecastData = openMeteoService.getWeekForecastForPickleball();
+        SortedSet<WeatherDayData> forecastData = openMeteoService.getWeekForecast(Location.pickleball());
         return composeFullForecast(forecastData);
     }
 
@@ -83,7 +84,7 @@ public class PickleballService implements ForecastService {
         int cloudCover = weatherHourData.cloudCover();
         int precipitationProbability = weatherHourData.precipitationProbability();
         double windSpeed = weatherHourData.windSpeed();
-        double windGusts = weatherHourData.windsGusts();
+        double windGusts = weatherHourData.windGusts();
         return "%s %s %2d %d %d %d %3d %2.0f %2.0f".formatted(hour, precipitationFormatted, precipitationProbability,
                 temperature, apparentTemperature, relativeHumidity, cloudCover, windSpeed, windGusts);
     }
