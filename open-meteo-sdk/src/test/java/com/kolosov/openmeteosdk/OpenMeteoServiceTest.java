@@ -19,7 +19,7 @@ class OpenMeteoServiceTest {
         // setup
 
         // act
-        System.out.println(service.getPerceptionForecast(Location.pickleball()));
+        System.out.println(service.getWeekForecast(Location.pickleball()));
 
         // verify
 

@@ -1,5 +1,6 @@
 package com.kolosov.openmeteosdk;
 
+import com.kolosov.openmeteosdk.api.OpenMeteoResponse.OpenMeteoHourlyForecast;
 import com.kolosov.openmeteosdk.api.WeatherDayData;
 import com.kolosov.openmeteosdk.api.WeatherDayData.WeatherHourData;
 import com.kolosov.openmeteosdk.api.OpenMeteoAPIClient;
@@ -24,16 +25,18 @@ public class OpenMeteoService {
 
     private final OpenMeteoAPIClient client;
 
-    public SortedSet<WeatherDayData> getPrecipitationForecastForPickleball() {
-        OpenMeteoResponse perceptionForecast = getPerceptionForecast(Location.pickleball());
+    public SortedSet<WeatherDayData> getWeekForecastForPickleball() {
+        Location pickleball = Location.pickleball();
+        OpenMeteoResponse perceptionForecast = client.getRawForecast(pickleball.latitude(), pickleball.longitude());
         return mapResponse(perceptionForecast.hourly());
     }
 
-    public OpenMeteoResponse getPerceptionForecast(Location location) {
-        return client.getRawForecast(location.latitude(), location.longitude());
+    public SortedSet<WeatherDayData> getWeekForecast(Location location) {
+        OpenMeteoResponse perceptionForecast = client.getRawForecast(location.latitude(), location.longitude());
+        return mapResponse(perceptionForecast.hourly());
     }
 
-    private SortedSet<WeatherDayData> mapResponse(OpenMeteoResponse.Hourly container) {
+    private SortedSet<WeatherDayData> mapResponse(OpenMeteoHourlyForecast container) {
         Map<LocalDate, SortedSet<WeatherHourData>> map = IntStream.range(0, container.time().size())
                 .boxed()
                 .map(i -> mapForecastDTO(container, i))
@@ -57,7 +60,7 @@ public class OpenMeteoService {
                                double windGusts) {
     }
 
-    private ForecastDTO mapForecastDTO(OpenMeteoResponse.Hourly container, Integer index) {
+    private ForecastDTO mapForecastDTO(OpenMeteoHourlyForecast container, Integer index) {
         return new ForecastDTO(
                 container.time().get(index),
                 container.precipitation().get(index),

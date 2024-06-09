@@ -3,9 +3,9 @@ package com.kolosov.openmeteosdk.api;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record OpenMeteoResponse(Hourly hourly) {
+public record OpenMeteoResponse(OpenMeteoHourlyForecast hourly) {
 
-    public record Hourly(
+    public record OpenMeteoHourlyForecast(
             List<LocalDateTime> time,
             List<Double> precipitation,
             List<Integer> precipitation_probability,

@@ -28,7 +28,7 @@ public class PickleballService implements ForecastService {
 
     @Override
     public String getForecast() {
-        SortedSet<WeatherDayData> forecastData = openMeteoService.getPrecipitationForecastForPickleball();
+        SortedSet<WeatherDayData> forecastData = openMeteoService.getWeekForecastForPickleball();
         return composeFullForecast(forecastData);
     }
 
