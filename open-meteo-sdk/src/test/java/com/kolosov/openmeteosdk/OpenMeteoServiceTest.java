@@ -1,13 +1,10 @@
-package com.kolosov.weatheradviserbot.openMeteo;
+package com.kolosov.openmeteosdk;
 
-import com.kolosov.openmeteosdk.OpenMeteoService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import static com.kolosov.openmeteosdk.Location.PICKLEBALL;
 
 
 @ExtendWith(SpringExtension.class)
@@ -22,7 +19,7 @@ class OpenMeteoServiceTest {
         // setup
 
         // act
-        System.out.println(service.getPerceptionForecast(PICKLEBALL));
+        System.out.println(service.getPerceptionForecast(Location.pickleball()));
 
         // verify
 

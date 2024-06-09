@@ -15,7 +15,6 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static com.kolosov.openmeteosdk.Location.PICKLEBALL;
 import static java.util.stream.Collectors.toCollection;
 
 @Service
@@ -26,12 +25,12 @@ public class OpenMeteoService {
     private final OpenMeteoAPIClient client;
 
     public SortedSet<WeatherDayData> getPrecipitationForecastForPickleball() {
-        OpenMeteoResponse perceptionForecast = getPerceptionForecast(PICKLEBALL);
+        OpenMeteoResponse perceptionForecast = getPerceptionForecast(Location.pickleball());
         return mapResponse(perceptionForecast.hourly());
     }
 
     public OpenMeteoResponse getPerceptionForecast(Location location) {
-        return client.getRawForecast(location.getLatitude(), location.getLongitude());
+        return client.getRawForecast(location.latitude(), location.longitude());
     }
 
     private SortedSet<WeatherDayData> mapResponse(OpenMeteoResponse.Hourly container) {

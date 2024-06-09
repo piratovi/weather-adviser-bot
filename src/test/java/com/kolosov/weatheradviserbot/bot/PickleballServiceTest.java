@@ -14,30 +14,15 @@ class PickleballServiceTest {
     @Autowired
     PickleballService service;
 
-//    @Test
-//    public void formatForecastLine() {
+    @Test
+    public void getForecast() {
         // setup
 
         // act
-//        System.out.println(service.formatForecastLine(Map.entry(LocalDateTime.now(), 222.22)));
-//        System.out.println(service.formatForecastLine(Map.entry(LocalDateTime.now(), 22.22)));
-//        System.out.println(service.formatForecastLine(Map.entry(LocalDateTime.now(), 2.22)));
-//        System.out.println(service.formatForecastLine(Map.entry(LocalDateTime.now(), 0.22)));
-//        System.out.println(service.formatForecastLine(Map.entry(LocalDateTime.now(), 0.2)));
-//        System.out.println(service.formatForecastLine(Map.entry(LocalDateTime.now(), 0.0)));
+        String forecast = service.getForecast();
 
         // verify
-//    }
-
-//    @Test
-//    public void getForecast() {
-//        // setup
-//
-//        // act
-//        String forecast = service.getForecast();
-//
-//        // verify
-//        System.out.println(forecast);
-//    }
+        System.out.println(forecast);
+    }
 
 }
