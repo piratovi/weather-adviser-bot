@@ -30,11 +30,12 @@ public class OpenMeteoService {
     }
 
     private SortedSet<WeatherDayData> groupHourlyForecastsByDay(OpenMeteoHourlyForecast hourlyForecast) {
-        Map<LocalDate, SortedSet<WeatherHourData>> map = IntStream.range(0, hourlyForecast.time().size())
+        int hoursCount = hourlyForecast.time().size();
+        Map<LocalDate, SortedSet<WeatherHourData>> map = IntStream.range(0, hoursCount)
                 .boxed()
                 .map(i -> mapper.toIntermediateDTO(hourlyForecast, i))
                 .collect(Collectors.groupingBy(
-                        f -> f.dateTime().toLocalDate(),
+                        mapper::getLocalDate,
                         Collectors.mapping(mapper::toWeatherHourData, toCollection(TreeSet::new))
                 ));
         return map.entrySet().stream()

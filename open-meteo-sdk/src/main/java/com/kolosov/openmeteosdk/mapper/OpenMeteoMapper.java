@@ -5,6 +5,7 @@ import com.kolosov.openmeteosdk.api.WeatherDayData.WeatherHourData;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -22,6 +23,10 @@ public interface OpenMeteoMapper {
             double windSpeed,
             double windGusts
     ) {}
+
+    default LocalDate getLocalDate(IntermediateForecastDTO intermediate) {
+        return intermediate.dateTime().toLocalDate();
+    }
 
     default IntermediateForecastDTO toIntermediateDTO(OpenMeteoHourlyForecast hourlyForecast, int index) {
         return new IntermediateForecastDTO(
