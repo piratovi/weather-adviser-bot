@@ -35,4 +35,3 @@ out/
 
 ### VS Code ###
 .vscode/
-/open-meteo-sdk/src/main/generated/
