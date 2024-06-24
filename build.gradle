@@ -33,7 +33,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.telegram:telegrambots:6.8.0'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'com.kolosov:open-meteo-sdk:0.0.4'
+    implementation 'com.kolosov:open-meteo-sdk:0.0.5'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
